@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "helper_ref": "49f948faa9258a0c61caceaf225e179651397431",
+  "sources": [
+    {
+      "repo": "hugohe3/ppt-master",
+      "version": "6.7.0",
+      "ref": "b4efe3ddf237a97a42880164759162f8e2412f2f",
+      "license_path": "LICENSE",
+      "paths": ["skills/ppt-master"]
+    },
+    {
+      "repo": "obra/superpowers",
+      "version": "6.4.2",
+      "ref": "8ca22dba9a94f28898bbce59f2537ff4d87c747d",
+      "license_path": "LICENSE",
+      "paths": [
+        "skills/brainstorming",
+        "skills/diagnosing-superpowers",
+        "skills/dispatching-parallel-agents",
+        "skills/executing-plans",
+        "skills/finishing-a-development-branch",
+        "skills/receiving-code-review",
+        "skills/requesting-code-review",
+        "skills/subagent-driven-development",
+        "skills/systematic-debugging",
+        "skills/test-driven-development",
+        "skills/using-git-worktrees",
+        "skills/using-superpowers",
+        "skills/verification-before-completion",
+        "skills/writing-plans",
+        "skills/writing-skills"
+      ]
+    },
+    {
+      "repo": "openai/skills",
+      "version": "2026-10-18 public snapshot",
+      "ref": "49f948faa9258a0c61caceaf225e179651397431",
+      "paths": [
+        "skills/.curated/pdf",
+        "skills/.system/openai-docs",
+        "skills/.system/skill-creator",
+        "skills/.system/skill-installer",
+        "skills/.system/imagegen"
+      ]
+    }
+  ]
+}
