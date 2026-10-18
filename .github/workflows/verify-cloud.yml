@@ -1,0 +1,28 @@
+name: Verify cloud setup
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/verify-cloud.yml'
+      - 'scripts/**'
+      - '.agents/skills/cloud-*/**'
+      - 'requirements.txt'
+      - 'skills.lock.json'
+
+permissions:
+  contents: read
+
+jobs:
+  linux-setup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install skills and run Office/PDF smoke checks
+        run: sh scripts/setup.sh
+      - name: Validate adapted skills with the installed official validator
+        run: |
+          for skill in cloud-documents cloud-spreadsheets cloud-presentations; do
+            .venv/bin/python .agents/skills/skill-creator/scripts/quick_validate.py ".agents/skills/$skill"
+          done
