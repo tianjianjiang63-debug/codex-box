@@ -21,26 +21,27 @@ def diagnose() -> dict:
     skills = {}
     for source in lock["sources"]:
         for path in source["paths"]:
-            name = Path(path).name
+            name = source.get("names", {}).get(path, Path(path).name)
             skills[name] = {
                 "present": (ROOT / ".agents" / "skills" / name / "SKILL.md").is_file(),
                 "source_matches": state.get(name) == {"repo": source["repo"], "ref": source["ref"], "path": path},
             }
     for name in ["cloud-documents", "cloud-spreadsheets", "cloud-presentations"]:
         skills[name] = {"present": (ROOT / ".agents" / "skills" / name / "SKILL.md").is_file(), "source_matches": True}
-    binaries = {"libreoffice": shutil.which("libreoffice") or shutil.which("soffice"), "pdftoppm": shutil.which("pdftoppm"), "git": shutil.which("git")}
+    binaries = {"libreoffice": shutil.which("libreoffice") or shutil.which("soffice"), "pdftoppm": shutil.which("pdftoppm"), "git": shutil.which("git"), "agent_reach": str(ROOT / ".venv" / "bin" / "agent-reach") if (ROOT / ".venv" / "bin" / "agent-reach").is_file() else None}
     fonts = None
     if shutil.which("fc-match"):
         fonts = subprocess.check_output(["fc-match", "Noto Sans CJK SC"], text=True).strip()
     report = {
         "platform": platform.system(), "python": sys.version.split()[0],
         "python_version_ok": sys.version_info >= (3, 11),
+        "agent_reach_cli_installed": importlib.util.find_spec("agent_reach") is not None,
         "modules": {name: importlib.util.find_spec(name) is not None for name in MODULES},
         "binaries": binaries, "cjk_font_match": fonts, "skills": skills,
         "external_connections": "not tested; confirm the task's actual connector/MCP tools",
         "cloud_environment_published": "not verified by this local report",
     }
-    report["ready"] = report["python_version_ok"] and all(report["modules"].values()) and all(binaries.values()) and all(s["present"] and s["source_matches"] for s in skills.values())
+    report["ready"] = report["python_version_ok"] and report["agent_reach_cli_installed"] and all(report["modules"].values()) and all(binaries.values()) and all(s["present"] and s["source_matches"] for s in skills.values())
     output = ROOT / ".work" / "cloud-doctor.json"
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
