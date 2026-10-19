@@ -8,6 +8,8 @@
 - Python 使用本仓库 `.venv/bin/python`；不要覆盖系统 Python 或修改用户级 Codex 配置。
 - 若 `.work/cloud-doctor.json` 不存在，运行 `.venv/bin/python scripts/doctor.py`；缺少 `.venv` 时先完成安装。
 - 第三方技能位于 `.agents/skills/`，使用前阅读相应 SKILL.md。下载和安装状态见 `.work/skills-installed.json`。
+- Agent Reach 的命令行程序位于 `.venv/bin/agent-reach`；使用它前运行 `.venv/bin/agent-reach doctor --json`，渠道状态记录在 `.work/agent-reach-doctor.json`。新任务中的 shell 不一定继承安装脚本的 PATH，调用时使用完整路径或先激活 `.venv`。
+- Agent Reach 需要外网和各平台的独立登录条件；技能或 CLI 已安装不代表 Twitter、小红书等登录渠道可用。不要把 Cookie 或访问令牌写入仓库。
 - 新技能首次安装后可能需要下一轮任务才能被宿主发现。文件存在不等于宿主工具、账户连接或 API 凭据可用。
 - 按宿主实际工具列表验证 Gmail、Drive、Figma、CNKI、图像生成、子代理、安全扫描等能力；不猜工具名，不把账号权限写进仓库。
 
