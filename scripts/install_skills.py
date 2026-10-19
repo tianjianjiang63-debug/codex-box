@@ -45,7 +45,7 @@ def install(only_repo: str | None = None) -> dict:
             download(f"https://raw.githubusercontent.com/{source['repo']}/{source['ref']}/{source['license_path']}", ROOT / ".agents" / "third-party" / (source["repo"].replace("/", "-") + "-LICENSE"))
         pending = []
         for skill_path in source["paths"]:
-            name = Path(skill_path).name
+            name = source.get("names", {}).get(skill_path, Path(skill_path).name)
             identity = {"repo": source["repo"], "ref": source["ref"], "path": skill_path}
             target = destination_root / name
             if target.exists():
@@ -56,7 +56,10 @@ def install(only_repo: str | None = None) -> dict:
             pending.append((name, skill_path, identity))
         if pending:
             print(f"Installing {len(pending)} skills from {source['repo']} at {source['ref']}", flush=True)
-            subprocess.run([sys.executable, str(helper_dir / "install-skill-from-github.py"), "--repo", source["repo"], "--ref", source["ref"], "--path", *[p for _, p, _ in pending], "--dest", str(destination_root), "--method", "download"], check=True, timeout=1200)
+            command = [sys.executable, str(helper_dir / "install-skill-from-github.py"), "--repo", source["repo"], "--ref", source["ref"], "--path", *[p for _, p, _ in pending], "--dest", str(destination_root), "--method", "download"]
+            if len(pending) == 1 and pending[0][0] != Path(pending[0][1]).name:
+                command.extend(["--name", pending[0][0]])
+            subprocess.run(command, check=True, timeout=1200)
             for name, _, identity in pending:
                 state[name] = identity
             work.mkdir(parents=True, exist_ok=True)
