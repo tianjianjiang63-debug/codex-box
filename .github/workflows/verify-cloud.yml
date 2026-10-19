@@ -23,6 +23,6 @@ jobs:
         run: sh scripts/setup.sh
       - name: Validate adapted skills with the installed official validator
         run: |
-          for skill in cloud-documents cloud-spreadsheets cloud-presentations; do
+          for skill in cloud-documents cloud-spreadsheets cloud-presentations agent-reach; do
             .venv/bin/python .agents/skills/skill-creator/scripts/quick_validate.py ".agents/skills/$skill"
           done
