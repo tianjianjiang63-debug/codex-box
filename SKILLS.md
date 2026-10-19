@@ -4,7 +4,7 @@
 
 ## 安装脚本实际提供什么
 
-执行 `sh scripts/setup.sh` 后，从固定上游提交安装 **21 个公开技能**，加上仓库内 **3 个云端适配技能**，合计 **24 个技能入口**。最终以 `.work/skills-installed.json` 和 `.work/cloud-doctor.json` 为准，不能仅凭本表宣称已在云端装好。
+执行 `sh scripts/setup.sh` 后，从固定上游提交安装 **22 个公开技能**，加上仓库内 **3 个云端适配技能**，合计 **25 个技能入口**。最终以 `.work/skills-installed.json` 和 `.work/cloud-doctor.json` 为准，不能仅凭本表宣称已在云端装好。
 
 | 本机技能 | 本仓库方案 | 能力边界 |
 | --- | --- | --- |
@@ -17,6 +17,7 @@
 | skill-creator | OpenAI 公开版固定提交安装 | 可创建仓库内技能；不赋予额外账号权限 |
 | skill-installer | OpenAI 公开版固定提交安装 | 安装源仍需网络；不会覆盖现有同名技能 |
 | imagegen | OpenAI 公开版固定提交安装 | 需要宿主 imagegen 工具，或按技能要求配置 API key；没有迁移桌面额度或凭据 |
+| agent-reach | 官方 1.5.0 技能及同提交 CLI | 可运行 `.venv/bin/agent-reach doctor --json`；云端网络域名、第三方 CLI 与登录态仍按渠道配置 |
 | cnki-search | 条件依赖，未宣称已装好服务 | 云端须另接可访问的 cnki-mcp 与机构认证；本机 Profile 不复制 |
 | explore-cnki-view | 继续在本机使用 | 当前官方云端环境不支持浏览器/computer use；不宣称可在云端复现页面下载 |
 | computer-use:computer-use | 继续在本机使用 | Windows 桌面、用户浏览器及登录态不可由本仓库复制 |
@@ -65,6 +66,7 @@ Gmail、Google Calendar、Google Contacts、GitHub、Atlassian 和 Linear 在本
 - PPT Master：https://github.com/hugohe3/ppt-master ，6.7.0，MIT。
 - Superpowers：https://github.com/obra/superpowers ，6.4.2，MIT。
 - OpenAI 公开技能：https://github.com/openai/skills ，固定快照，保留每个技能自带的许可与完整资源。
+- Agent Reach：https://github.com/Panniantong/Agent-Reach ，1.5.0，MIT；技能文件与 CLI 均锁定到同一提交。
 - 本仓库三个 cloud-* 技能为云端适配指令，明确标注与桌面插件的区别。
 - 上游提交锁定见 skills.lock.json；安装器来自同一锁定的 OpenAI skill-installer。安装第三方技能时不会去除归属、许可或完整性检查。
 
