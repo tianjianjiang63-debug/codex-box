@@ -20,4 +20,5 @@ ebooklib>=0.18,<1
 nbconvert>=7,<8
 skia-pathops>=0.9,<1
 uharfbuzz>=0.50,<1
+agent-reach @ https://github.com/Panniantong/Agent-Reach/archive/94f06c1969dfc1834001269d79d3ad0972d9dee6.zip
 # Narration, image API backends and optional web editor are not enabled here.
