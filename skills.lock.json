@@ -43,6 +43,14 @@
         "skills/.system/skill-installer",
         "skills/.system/imagegen"
       ]
+    },
+    {
+      "repo": "Panniantong/Agent-Reach",
+      "version": "1.5.0",
+      "ref": "94f06c1969dfc1834001269d79d3ad0972d9dee6",
+      "license_path": "LICENSE",
+      "paths": ["agent_reach/skill"],
+      "names": {"agent_reach/skill": "agent-reach"}
     }
   ]
 }
