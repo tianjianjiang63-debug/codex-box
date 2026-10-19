@@ -36,6 +36,8 @@ python3 -m venv .venv
 TASK_PYTHON="$TASK_ROOT/.venv/bin/python"
 "$TASK_PYTHON" -m pip install --disable-pip-version-check -r requirements.txt
 "$TASK_PYTHON" scripts/install_skills.py
+"$TASK_ROOT/.venv/bin/agent-reach" --version
+"$TASK_ROOT/.venv/bin/agent-reach" doctor --json > "$TASK_ROOT/.work/agent-reach-doctor.json"
 "$TASK_PYTHON" scripts/doctor.py --strict
 "$TASK_PYTHON" scripts/smoke_artifacts.py --render
 echo 'Setup passed. Review .work/cloud-doctor.json, then publish the cloud environment.'
